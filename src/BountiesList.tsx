@@ -9,16 +9,23 @@ export const BountiesList = () => {
   const [bounties, setBounties] = useState<Bounty[] | null>(null);
 
   useEffect(() => {
-    typedApi.query.Bounties.Bounties.getEntries().then((entries) => {
-      setBounties(
-        entries.map(
-          ({ keyArgs, value }): Bounty => ({
-            ...value,
-            id: keyArgs[0],
-          })
-        )
+    const subscription =
+      typedApi.query.Bounties.Bounties.watchEntries().subscribe(
+        ({ entries, deltas }) => {
+          if (!deltas) return;
+
+          setBounties(
+            entries.map(
+              ({ args, value }): Bounty => ({
+                ...value,
+                id: args[0],
+              })
+            )
+          );
+        }
       );
-    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   if (!bounties) {
