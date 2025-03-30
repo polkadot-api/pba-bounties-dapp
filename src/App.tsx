@@ -1,11 +1,12 @@
-import { Button } from "@/components/ui/button";
+import { BountiesList } from "./BountiesList";
 
 function App() {
   return (
-    <div className="">
-      <div className="flex flex-col items-center justify-center min-h-svh">
-        <Button>Click me</Button>
+    <div className="container m-auto">
+      <div className="p-2 border-b">
+        <h1 className="font-bold text-2xl">Bounties</h1>
       </div>
+      <BountiesList />
     </div>
   );
 }
