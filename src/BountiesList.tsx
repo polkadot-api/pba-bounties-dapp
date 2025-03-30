@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { typedApi } from "./chain";
+import { getBounties } from "./bounty.state";
 import { formatDOT } from "./lib/format";
 import { usePromise } from "./lib/usePromise";
-import { Bounty, getBounties } from "./bounty.state";
+import { Bounty } from "@polkadot-api/sdk-governance";
 
 export const BountiesList = () => {
   const bounties = usePromise(() => getBounties());
